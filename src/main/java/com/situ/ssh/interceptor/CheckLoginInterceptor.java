@@ -4,6 +4,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.ActionProxy;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
+import com.situ.ssh.pojo.Admin;
 
 public class CheckLoginInterceptor extends AbstractInterceptor {
 
@@ -13,8 +14,11 @@ public class CheckLoginInterceptor extends AbstractInterceptor {
 		ActionContext actionContext = invocation.getInvocationContext();
 		ActionProxy proxy = invocation.getProxy();
 		String methodName = proxy.getMethod();
-		if ("login".equals(methodName)) {
+		System.out.println(methodName);
+		if (!"login".equals(methodName)) {
 			Object object = actionContext.getSession().get("admin");
+			System.out.println("CheckLoginInterceptor.intercept()");
+			System.out.println(object);
 			if (object == null) {
                return "login";
            } 
