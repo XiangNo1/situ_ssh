@@ -14,7 +14,7 @@ public class AdminServiceImpl implements IAdminService{
 
 	public Admin login(Admin admin) {
 		// TODO Auto-generated method stub
-		return adminDao.login(admin);
+		return (Admin) adminDao.login(admin);
 	}
 
 }

@@ -10,7 +10,7 @@ import com.situ.ssh.util.MD5Util;
 
 
 @Repository
-public class AdminDaoImpl extends BaseDaoImpl<Admin> implements IAdminDao {
+public class AdminDaoImpl extends BaseDaoImpl<Admin> implements IAdminDao<Admin> {
 
 	@Override
 	public Admin login(Admin admin) {

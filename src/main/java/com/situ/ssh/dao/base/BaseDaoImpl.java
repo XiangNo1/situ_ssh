@@ -8,7 +8,11 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Projections;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
+
+import com.situ.ssh.util.PageBean;
 
 public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T>{
 	//代表当前操作的实体类的类型 Student.class  Admin.class
@@ -60,6 +64,28 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T>{
 		// "FROM student"
 		String sql = "FROM " + entityClass.getSimpleName();
 		return (List<T>) getHibernateTemplate().find(sql);
+	}
+
+	@Override
+	public void pageQuery(PageBean pageBean) {
+		// TODO Auto-generated method stub
+		Integer currentPage = pageBean.getCurrentPage();
+ 		Integer pageSize = pageBean.getPageSize();
+		DetachedCriteria detachedCriteria = pageBean.getDetachedCriteria();
+ 		
+ 		//查询total:总记录数
+ 		detachedCriteria.setProjection(Projections.rowCount());
+ 		List<?> countList = getHibernateTemplate().findByCriteria(detachedCriteria);
+ 		long total = (long) countList.get(0);
+ 		pageBean.setTotal((int)total);
+ 		
+ 		//rows:当前页数据
+ 		detachedCriteria.setProjection(null);
+ 		int firstResult = (currentPage - 1) * pageSize;
+ 		List<?> rows = getHibernateTemplate().findByCriteria(detachedCriteria, firstResult, pageSize);
+ 		//String sql = "FROM Student limit ?,? ";
+ 		//getHibernateTemplate().find(sql, firstResult, pageSize);
+ 		pageBean.setRows(rows);
 	}
 
 }
