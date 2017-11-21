@@ -17,6 +17,7 @@ public class EmployeeAction extends BaseAction<Employee>{
 
 	public String findAll(){
 		employeeService.findAll(pageBean);
+		System.out.println(pageBean.toString());
 		obj2JsonForEasyUI(pageBean);
 		return NONE;
 	}

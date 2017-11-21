@@ -11,6 +11,7 @@ import org.hibernate.criterion.DetachedCriteria;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import com.situ.ssh.common.DateJsonValueProcessor;
 import com.situ.ssh.pojo.Admin;
 import com.situ.ssh.util.PageBean;
 
@@ -64,6 +65,9 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T> {
 		JsonConfig jsonConfig = new JsonConfig();
 		//指定哪些属性不进行json转换
 		jsonConfig.setExcludes(excludes);
+		//jf.registerJsonValueProcessor(java.sql.Timestamp.class, new DateJsonValueProcessor("yyyy-MM-dd HH:mm:ss"));  
+		jsonConfig.registerJsonValueProcessor(java.sql.Timestamp.class, new DateJsonValueProcessor("yyyy-MM-dd"));  
+		jsonConfig.registerJsonValueProcessor(java.util.Date.class, new DateJsonValueProcessor("yyyy-MM-dd"));
 		String json = JSONObject.fromObject(object, jsonConfig).toString();
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/json;charset=utf-8");
