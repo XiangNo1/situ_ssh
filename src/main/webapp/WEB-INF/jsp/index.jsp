@@ -286,13 +286,17 @@ function openTab(text, url, iconCls) {
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-sjzdgl'"
 					style="width: 150px;">部门管理</a> <a
-					href="javascript:openTab('产品信息查询','${ctx}/product/index.action','icon-cpxxgl')"
+					href="javascript:openTab('登录角色管理','${ctx}/datadic_userRole.action','icon-man')"
 					class="easyui-linkbutton"
-					data-options="plain:true,iconCls:'icon-cpxxgl'"
-					style="width: 150px;">产品信息查询</a> 
-					<a href="javascript:openTab('用户信息管理','${ctx}/user/index.action','icon-user')"
-					class="easyui-linkbutton"
-					data-options="plain:true,iconCls:'icon-user'" style="width: 150px;">用户信息管理</a>
+					data-options="plain:true,iconCls:'icon-man'"
+					style="width: 150px;">登录角色管理</a> 
+					<c:if test="${admin.role == '系统管理员'}">
+					
+						<a href="javascript:openTab('账号信息管理','${ctx}/admin_admin.action','icon-user')"
+						class="easyui-linkbutton"
+						data-options="plain:true,iconCls:'icon-user'" style="width: 150px;">账号信息管理</a>
+					
+					</c:if>
 			</div>
 			<div title="系统管理" data-options="iconCls:'icon-item'"
 				style="padding: 10px">

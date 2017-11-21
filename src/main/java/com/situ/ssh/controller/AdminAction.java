@@ -46,4 +46,10 @@ public class AdminAction extends BaseAction<Admin>{
 			return NONE;
 		}
 	}
+	
+	public String findAdmin() {
+		adminService.findAdmin(pageBean);
+		obj2JsonForEasyUI(pageBean);
+		return NONE;
+	}
 }

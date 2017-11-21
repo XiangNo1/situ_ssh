@@ -71,4 +71,14 @@ public class DataDicAction extends BaseAction<Data_dic>  {
 		obj2JsonForEasyUI(pageBean);
 		return NONE;
 	}
+	
+	public String findUserRole(){
+		DetachedCriteria beautyCriteria = DetachedCriteria.forClass(Data_dic.class);
+		beautyCriteria.add(Restrictions.eq("name", "登录角色"));
+		pageBean.setDetachedCriteria(beautyCriteria);
+		dataDicService.pageQuery(pageBean);
+		System.out.println(pageBean);
+		obj2JsonForEasyUI(pageBean);
+		return NONE;
+	}
 }

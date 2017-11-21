@@ -38,8 +38,11 @@
 			<result type="dispatcher">/WEB-INF/jsp/index.jsp</result>
 		</action> -->
 		<!-- 首页转发 -->
-		<action name="datadic_department">
-			<result type="dispatcher">/WEB-INF/jsp/department.jsp</result>
+		<action name="datadic_*">
+			<result type="dispatcher">/WEB-INF/jsp/{1}.jsp</result>
+		</action>
+		<action name="admin_*">
+			<result type="dispatcher">/WEB-INF/jsp/{1}.jsp</result>
 		</action>
 		<!-- 数据字典 -->
 		<action name="dataDic_*" class="dataDicAction" method="{1}">
