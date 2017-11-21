@@ -10,6 +10,7 @@
 			</id>
 			<property name="product_id" column="product_id" type="java.lang.String"></property>
 			<property name="name" column="name" type="java.lang.String"></property>
+			<property name="store_id" column="store_id" type="java.lang.Integer"></property>
 			<property name="specification" column="specification" type="java.lang.String"></property>
 			<property name="type" column="type" type="java.lang.String"></property>
 			<property name="place" column="place" type="java.lang.String"></property>

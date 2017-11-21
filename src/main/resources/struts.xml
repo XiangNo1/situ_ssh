@@ -33,6 +33,9 @@
 			<result name="login">/WEB-INF/jsp/login.jsp</result>
 			<result name="index">/WEB-INF/jsp/index.jsp</result>
 		</action>
+		<!-- 产品 -->
+		<action name="product_*" class="productAction" method="{1}">
+		</action>
 		<!-- 首页 -->
 		<!-- <action name="index_index">
 			<result type="dispatcher">/WEB-INF/jsp/index.jsp</result>
@@ -42,6 +45,9 @@
 			<result type="dispatcher">/WEB-INF/jsp/{1}.jsp</result>
 		</action>
 		<action name="admin_*">
+			<result type="dispatcher">/WEB-INF/jsp/{1}.jsp</result>
+		</action>
+		<action name="to_*">
 			<result type="dispatcher">/WEB-INF/jsp/{1}.jsp</result>
 		</action>
 		<!-- 数据字典 -->

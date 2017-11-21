@@ -213,17 +213,13 @@ function openTab(text, url, iconCls) {
 	</div>
 	<div region="west" style="width: 200px" title="导航菜单" split="true">
 		<div class="easyui-accordion" data-options="fit:true,border:false">
-			<div title="营销管理" data-options="selected:true,iconCls:'icon-yxgl'"
+			<div title="商品管理" data-options="selected:true,iconCls:'icon-yxgl'"
 				style="padding: 10px">
 				<a
-					href="javascript:openTab('营销机会管理','${ctx}/saleChance/index.action','icon-yxjhgl')"
+					href="javascript:openTab('商品信息管理','${ctx}/to_product.action','icon-yxjhgl')"
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-yxjhgl'"
-					style="width: 150px">营销机会管理</a> <a
-					href="javascript:openTab('客户开发计划','${ctx}/saleChance/cusDevPlan.action','icon-khkfjh')"
-					class="easyui-linkbutton"
-					data-options="plain:true,iconCls:'icon-khkfjh'"
-					style="width: 150px">客户开发计划</a>
+					style="width: 150px">商品信息管理</a> 
 			</div>
 			<div title="客户管理" data-options="iconCls:'icon-khgl'"
 				style="padding: 10px;">
@@ -292,7 +288,7 @@ function openTab(text, url, iconCls) {
 					style="width: 150px;">登录角色管理</a> 
 					<c:if test="${admin.role == '系统管理员'}">
 					
-						<a href="javascript:openTab('账号信息管理','${ctx}/admin_admin.action','icon-user')"
+						<a href="javascript:openTab('账号信息管理(系统管理员专用)','${ctx}/admin_admin.action','icon-user')"
 						class="easyui-linkbutton"
 						data-options="plain:true,iconCls:'icon-user'" style="width: 150px;">账号信息管理</a>
 					
