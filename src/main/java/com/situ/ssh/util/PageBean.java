@@ -51,4 +51,10 @@ public class PageBean {
 		this.detachedCriteria = detachedCriteria;
 	}
 
+	@Override
+	public String toString() {
+		return "PageBean [currentPage=" + currentPage + ", pageSize=" + pageSize + ", detachedCriteria="
+				+ detachedCriteria + ", total=" + total + ", rows=" + rows + "]";
+	}
+
 }

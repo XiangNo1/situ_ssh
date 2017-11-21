@@ -37,7 +37,13 @@
 		<!-- <action name="index_index">
 			<result type="dispatcher">/WEB-INF/jsp/index.jsp</result>
 		</action> -->
-		
+		<!-- 首页转发 -->
+		<action name="datadic_department">
+			<result type="dispatcher">/WEB-INF/jsp/department.jsp</result>
+		</action>
+		<!-- 数据字典 -->
+		<action name="dataDic_*" class="dataDicAction" method="{1}">
+		</action>
 		<!-- 登录登出 -->
 		<action name="index_*" class="indexAction" method="{1}">
 			<result name="index">/WEB-INF/jsp/index.jsp</result>

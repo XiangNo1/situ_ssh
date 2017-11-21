@@ -2,20 +2,20 @@ package com.situ.ssh.pojo;
 
 import java.io.Serializable;
 
-public class Date_dic implements Serializable {
+public class Data_dic implements Serializable {
 
 	private Integer id;
 	//名
 	private String name;
 	//值
 	private String value;
-	public Date_dic(Integer id, String name, String value) {
+	public Data_dic(Integer id, String name, String value) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.value = value;
 	}
-	public Date_dic() {
+	public Data_dic() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

@@ -205,7 +205,7 @@ function openTab(text, url, iconCls) {
 					<br/>
 					<br/>
 					<br/>
-					<font color="red" size="5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --设计师 崔翔飞</font>
+					<font color="red" size="5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ----设计师 崔翔飞</font>
 				
 				</div>
 			</div>
@@ -279,13 +279,13 @@ function openTab(text, url, iconCls) {
 					data-options="plain:true,iconCls:'icon-khlsfx'"
 					style="width: 150px;">客户流失分析</a>
 			</div>
-			<div title="基础数据管理" data-options="iconCls:'icon-jcsjgl'"
+			<div title="公司基础数据管理" data-options="iconCls:'icon-jcsjgl'"
 				style="padding: 10px">
 				<a
-					href="javascript:openTab('数据字典管理','${ctx}/dataDic/index.action','icon-sjzdgl')"
+					href="javascript:openTab('部门管理','${ctx}/datadic_department.action','icon-sjzdgl')"
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-sjzdgl'"
-					style="width: 150px;">数据字典管理</a> <a
+					style="width: 150px;">部门管理</a> <a
 					href="javascript:openTab('产品信息查询','${ctx}/product/index.action','icon-cpxxgl')"
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-cpxxgl'"

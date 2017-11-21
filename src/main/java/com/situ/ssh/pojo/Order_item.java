@@ -6,14 +6,14 @@ public class Order_item implements Serializable {
 
 	private Integer id;
 	//订单编号
-	private Integer order_no;
+	private String order_no;
 	//商品名称
 	private String name;
 	//商品价格
 	private Double price;
 	//商品购买数量
 	private Integer amount;
-	public Order_item(Integer id, Integer order_no, String name, Double price, Integer amount) {
+	public Order_item(Integer id, String order_no, String name, Double price, Integer amount) {
 		super();
 		this.id = id;
 		this.order_no = order_no;
@@ -31,10 +31,10 @@ public class Order_item implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Integer getOrder_no() {
+	public String getOrder_no() {
 		return order_no;
 	}
-	public void setOrder_no(Integer order_no) {
+	public void setOrder_no(String order_no) {
 		this.order_no = order_no;
 	}
 	public String getName() {
