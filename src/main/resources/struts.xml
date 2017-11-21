@@ -36,6 +36,9 @@
 		<!-- 产品 -->
 		<action name="product_*" class="productAction" method="{1}">
 		</action>
+		<!-- 员工 -->
+		<action name="employee_*" class="employeeAction" method="{1}">
+		</action>
 		<!-- 首页 -->
 		<!-- <action name="index_index">
 			<result type="dispatcher">/WEB-INF/jsp/index.jsp</result>

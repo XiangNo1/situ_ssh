@@ -1,13 +1,13 @@
 package com.situ.ssh.pojo;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 public class Employee implements Serializable{
 
 	private Integer id;
 	private String name;
-	//员工角色
+	//员工部门
 	private String role;
 	//手机号
 	private String phone;
