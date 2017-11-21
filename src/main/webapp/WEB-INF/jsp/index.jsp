@@ -224,14 +224,10 @@ function openTab(text, url, iconCls) {
 			<div title="客户管理" data-options="iconCls:'icon-khgl'"
 				style="padding: 10px;">
 				<a
-					href="javascript:openTab('客户信息管理','${ctx}/customer/index.action','icon-khxxgl')"
+					href="javascript:openTab('客户信息管理','${ctx}/to_customer.action','icon-khxxgl')"
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-khxxgl'"
-					style="width: 150px;">客户信息管理</a> <a
-					href="javascript:openTab('客户流失管理','${ctx}/customerLoss/index.action','icon-khlsgl')"
-					class="easyui-linkbutton"
-					data-options="plain:true,iconCls:'icon-khlsgl'"
-					style="width: 150px;">客户流失管理</a>
+					style="width: 150px;">客户信息管理</a>
 			</div>
 			<div title="员工管理" data-options="iconCls:'icon-fwgl'"
 				style="padding: 10px">

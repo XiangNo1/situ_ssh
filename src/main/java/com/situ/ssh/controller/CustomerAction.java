@@ -5,18 +5,18 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.situ.ssh.controller.base.BaseAction;
-import com.situ.ssh.pojo.Employee;
-import com.situ.ssh.service.IEmployeeService;
+import com.situ.ssh.pojo.Customer;
+import com.situ.ssh.service.ICustomerService;
 
 @Controller
 @Scope("prototype")
-public class EmployeeAction extends BaseAction<Employee>{
+public class CustomerAction extends BaseAction<Customer>{
 
 	@Autowired
-	private IEmployeeService employeeService;
+	private ICustomerService customerService;
 
 	public String findAll(){
-		employeeService.findAll(pageBean);
+		customerService.findAll(pageBean);
 		obj2JsonForEasyUI(pageBean);
 		return NONE;
 	}

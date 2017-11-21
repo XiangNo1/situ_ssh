@@ -39,6 +39,9 @@
 		<!-- 员工 -->
 		<action name="employee_*" class="employeeAction" method="{1}">
 		</action>
+		<!-- 客户 -->
+		<action name="customer_*" class="customerAction" method="{1}">
+		</action>
 		<!-- 首页 -->
 		<!-- <action name="index_index">
 			<result type="dispatcher">/WEB-INF/jsp/index.jsp</result>
