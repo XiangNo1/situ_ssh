@@ -9,6 +9,9 @@
 				<generator class="native"></generator>
 			</id>
 			<property name="name" column="NAME" type="java.lang.String"></property>
-			<property name="password" column="PASSWORD"></property>
+			<property name="password" column="PASSWORD" type="java.lang.String"></property>
+			<property name="trueName" column="trueName" type="java.lang.String"></property>
+			<property name="role" column="role" type="java.lang.String"></property>
+			<property name="department" column="department" type="java.lang.String"></property>
 		</class>
 </hibernate-mapping>
