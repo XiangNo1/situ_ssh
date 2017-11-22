@@ -3,6 +3,7 @@ package com.situ.ssh.controller.base;
 import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,9 +13,9 @@ import org.hibernate.criterion.DetachedCriteria;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.situ.ssh.common.DateJsonValueProcessor;
-import com.situ.ssh.pojo.Admin;
 import com.situ.ssh.util.PageBean;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 
@@ -77,6 +78,18 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T> {
 			e.printStackTrace();
 		}
 	}
+	
+	public void arr2json(List<?> list) {
+		HttpServletResponse resp = ServletActionContext.getResponse();
+		JSONArray json = JSONArray.fromObject(list);
+		resp.setContentType("text/json;charset=utf-8");
+		try {
+			resp.getWriter().println(json);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 	public void obj2JsonForEasyUI(Object object) {
 		obj2Json(object, new String[]{"currentPage", "detachedCriteria", "pageSize"});

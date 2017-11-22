@@ -42,6 +42,15 @@
 		<!-- 客户 -->
 		<action name="customer_*" class="customerAction" method="{1}">
 		</action>
+		<!-- 仓库 -->
+		<action name="store_*" class="storeAction" method="{1}">
+		</action>
+		<!-- 银行账款 -->
+		<action name="bank_*" class="bankAction" method="{1}">
+		</action>
+		<!-- 订单 -->
+		<action name="order_*" class="orderAction" method="{1}">
+		</action>
 		<!-- 首页 -->
 		<!-- <action name="index_index">
 			<result type="dispatcher">/WEB-INF/jsp/index.jsp</result>

@@ -4,15 +4,16 @@
 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package="com.situ.ssh.pojo" auto-import="true">
-		<class name="Order" table="orderr">
+		<class name="Bank" table="bank">
 			<id name="id" column="id">
 				<generator class="native"></generator>
 			</id>
-			<property name="order_no" column="order_no" type="java.lang.String"></property>
-			<property name="user" column="user" type="java.lang.String"></property>
 			<property name="payer" column="payer" type="java.lang.String"></property>
-			<property name="payment" column="payment" type="java.lang.Double"></property>
-			<property name="status" column="status" type="java.lang.Integer"></property>
+			<property name="person" column="person" type="java.lang.String"></property>
+			<property name="account" column="account" type="java.lang.String"></property>
+			<property name="accountName" column="accountName" type="java.lang.String"></property>
+			<property name="money" column="money" type="java.lang.Double"></property>
+			<property name="remark" column="remark" type="java.lang.String"></property>
 			<property name="time" column="time" type="java.util.Date"></property>
 		</class>
 </hibernate-mapping>

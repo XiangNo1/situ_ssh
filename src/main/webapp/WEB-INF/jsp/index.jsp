@@ -236,6 +236,30 @@ function openTab(text, url, iconCls) {
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-fwcj'" style="width: 150px;">员工信息管理</a>
 			</div>
+			<div title="仓库管理" data-options="iconCls:'icon-jcsjgl'"
+				style="padding: 10px;">
+				<a
+					href="javascript:openTab('仓库信息管理','${ctx}/to_store.action','icon-fwcl')"
+					class="easyui-linkbutton"
+					data-options="plain:true,iconCls:'icon-fwcl'"
+					style="width: 150px;">仓库信息管理</a>
+			</div>
+			<div title="银行账款管理" data-options="iconCls:'icon-jcsjgl'"
+				style="padding: 10px;">
+				<a
+					href="javascript:openTab('银行账款明细','${ctx}/to_bank.action','icon-fwcl')"
+					class="easyui-linkbutton"
+					data-options="plain:true,iconCls:'icon-fwcl'"
+					style="width: 150px;">银行账款明细</a>
+			</div>
+			<div title="订单管理" data-options="iconCls:'icon-jcsjgl'"
+				style="padding: 10px;">
+				<a
+					href="javascript:openTab('订单明细','${ctx}/to_order.action','icon-fwcl')"
+					class="easyui-linkbutton"
+					data-options="plain:true,iconCls:'icon-fwcl'"
+					style="width: 150px;">订单明细</a>
+			</div>
 			<div title="统计报表" data-options="iconCls:'icon-tjbb'"
 				style="padding: 10px">
 				<a href="javascript:openTab('客户贡献分析','${ctx}/customer/getCustomerContributePage.action','icon-khgxfx')"
