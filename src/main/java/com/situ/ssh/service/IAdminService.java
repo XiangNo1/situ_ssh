@@ -8,4 +8,10 @@ public interface IAdminService {
 	public Admin login(Admin admin);
 
 	public void findAdmin(PageBean pageBean);
+
+	public void addAdmin(Admin model);
+
+	public void updateAdmin(Admin model);
+
+	public void deleteAdmin(String ids);
 }

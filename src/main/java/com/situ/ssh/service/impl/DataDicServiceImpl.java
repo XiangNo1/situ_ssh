@@ -1,5 +1,7 @@
 package com.situ.ssh.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,6 +44,21 @@ public class DataDicServiceImpl implements IDataDicService {
 	public Data_dic findById(Integer id) {
 		// TODO Auto-generated method stub
 		return dataDicDao.findById(id);
+	}
+	@Override
+	public List<Data_dic> findDepartmentdic() {
+		// TODO Auto-generated method stub
+		return dataDicDao.findDepartmentdic();
+	}
+	@Override
+	public List<Data_dic> findUserRoledic() {
+		// TODO Auto-generated method stub
+		return dataDicDao.findUserRoledic();
+	}
+	@Override
+	public List<Data_dic> findCustomerLeveldic() {
+		// TODO Auto-generated method stub
+		return dataDicDao.findCustomerLeveldic();
 	}
 
 }

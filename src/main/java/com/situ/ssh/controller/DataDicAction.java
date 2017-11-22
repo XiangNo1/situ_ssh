@@ -1,5 +1,7 @@
 package com.situ.ssh.controller;
 
+import java.util.List;
+
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,6 +71,23 @@ public class DataDicAction extends BaseAction<Data_dic>  {
 		dataDicService.pageQuery(pageBean);
 		System.out.println(pageBean);
 		obj2JsonForEasyUI(pageBean);
+		return NONE;
+	}
+	
+	public String findDepartmentdic(){
+		List<Data_dic> list = dataDicService.findDepartmentdic();
+		arr2json(list);
+		return NONE;
+	}
+	public String findUserRoledic(){
+		List<Data_dic> list = dataDicService.findUserRoledic();
+		arr2json(list);
+		return NONE;
+	}
+	
+	public String findCustomerLeveldic(){
+		List<Data_dic> list = dataDicService.findCustomerLeveldic();
+		arr2json(list);
 		return NONE;
 	}
 	

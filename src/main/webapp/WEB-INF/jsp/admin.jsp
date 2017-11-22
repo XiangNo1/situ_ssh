@@ -57,7 +57,7 @@ var url;
 /* 打开添加dialog */
 function openAddDialog() {
 	$("#dialog").dialog("open").dialog("setTitle","添加信息");
-	url = "${ctx}/user/addUser.action";
+	url = "${ctx}/adminAction_addAdmin.action";
 	$('#form').form("clear");
 	
 }
@@ -70,7 +70,7 @@ function openUpdateDialog() {
 	}
 	var row = selections[0];
 	$("#dialog").dialog("open").dialog("setTitle","修改信息");
-	url = "${ctx}/user/updateUser.action";
+	url = "${ctx}/adminAction_updateAdmin.action";
 	$('#form').form("load", row);
 }
 
@@ -88,9 +88,14 @@ function doSave(){
 	        	$.messager.progress('close');	// 如果表单是无效的则隐藏进度条
 	       		 return $(this).form("validate");
 	        }
-	        if($("#roleName").combobox("getValue") == "") {
+	        if($("#role").combobox("getValue") == "") {
 	        	$.messager.progress('close');	// 如果表单是无效的则隐藏进度条
 	        	$.messager.alert("系统提示", "请选择用户角色");
+	        	return false;
+	        }
+	        if($("#department").combobox("getValue") == "") {
+	        	$.messager.progress('close');	// 如果表单是无效的则隐藏进度条
+	        	$.messager.alert("系统提示", "请选择部门");
 	        	return false;
 	        }
 	        //validate none 做表单字段验证，当所有字段都有效的时候返回true。该方法使用validatebox(验证框)插件。 
@@ -119,9 +124,9 @@ function doSave(){
 
 function doSearch(){
 	$("#datagrid").datagrid("load",{
-		'name' : $("#nameSearch").val(),
 		'trueName' : $("#trueNameSearch").val(),
-		'roleName' : $("#roleNameSearch").val()
+		'role' : $("#roleSearch").val(),
+		'department' : $("#departmentSearch").val()
 	})
 };
 
@@ -136,7 +141,7 @@ function doDelete() {
 	$.messager.confirm('确认','您确认想要删除记录吗？',function(r){    
 	    if (r){    
 	    	$.post(
-					"${ctx}/user/delete.action",
+					"${ctx}/adminAction_deleteAdmin.action",
 					{ids:ids}, 
 					function(data) {
 						$.messager.progress('close');	// 如果表单是无效的则隐藏进度条
@@ -175,13 +180,19 @@ function doDelete() {
 		<a class="easyui-linkbutton" href="javascript:doDelete()" iconCls="icon-remove">删除</a>
 		&nbsp;&nbsp;&nbsp;&nbsp;
 		<div>
-		      用户名：<input type="text" id="nameSearch"></input>
 		       真实姓名：<input type="text" id="trueNameSearch"></input>
-		       角色：<input type="text" id="roleNameSearch" class="easyui-combobox"
+		       角色：<input type="text" id="roleSearch" class="easyui-combobox"
 					 data-options="
-					 	url:'${ctx}/user/findRoleName.action',
-					 	valueField: 'roleName',
-					 	textField: 'roleName',
+					 	url:'${ctx}/dataDic_findUserRoledic.action',
+					 	valueField: 'value',
+					 	textField: 'value',
+					 	panelHeight:'auto'
+					 	 "/>
+	 	  所属部门：<input type="text" id="departmentSearch" class="easyui-combobox"
+					 data-options="
+					 	url:'${ctx}/dataDic_findDepartmentdic.action',
+					 	valueField: 'value',
+					 	textField: 'value',
 					 	panelHeight:'auto'
 					 	 "/>
 		  <a href="javascript:doSearch();" class="easyui-linkbutton" iconCls="icon-search">搜索</a>
@@ -206,22 +217,25 @@ function doDelete() {
 					<td>真实姓名：</td>
 					<td><input type="text" id="trueName" name="trueName" class="easyui-validatebox" required="true"/><font color="red">*</font></td>
 					<td>&nbsp;</td>
-					<td>邮箱：</td>
-					<td><input type="text" id="email" name="email" class="easyui-validatebox" required="true" validType="email"/><font color="red">*</font></td>
+					<td>角色：</td>
+					<td><input type="text" id="role" name="role" class="easyui-combobox"
+					 data-options="
+					 	url:'${ctx}/dataDic_findUserRoledic.action',
+					 	valueField: 'value',
+					 	textField: 'value',
+					 	panelHeight:'auto'
+					 	 "/><font color="red">*</font></td>
 				</tr>
 				<tr>
-					<td>联系电话：</td>
-					<td><input type="text" id="phone" name="phone" class="easyui-validatebox" required="true"/><font color="red">*</font></td>
-					<td>&nbsp;</td>
-					<td>用户角色：</td>
+					<td>部门：</td>
 					<td>
-						<select class="easyui-combobox" id="roleName" panelHeight='auto' name="roleName" editable="false">
-							<option value=""></option>
-							<option value="系统管理员">系统管理员</option>
-							<option value="销售主管">销售主管</option>
-							<option value="客户经理">客户经理</option>
-							<option value="高管">高管</option>
-						</select>
+						<input type="text" id="department" name="department" class="easyui-combobox"
+							 data-options="
+							 	url:'${ctx}/dataDic_findDepartmentdic.action',
+							 	valueField: 'value',
+							 	textField: 'value',
+							 	panelHeight:'auto'
+							 	 "/>
 						<font color="red">*</font>
 					</td>
 				</tr>

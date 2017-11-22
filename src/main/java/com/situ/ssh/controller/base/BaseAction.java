@@ -26,6 +26,15 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T> {
 	protected T model;
 	//创建离线查询对象
 	protected DetachedCriteria detachedCriteria = null;
+	protected String ids;
+
+	public String getIds() {
+		return ids;
+	}
+
+	public void setIds(String ids) {
+		this.ids = ids;
+	}
 
 	@Override
 	public T getModel() {
