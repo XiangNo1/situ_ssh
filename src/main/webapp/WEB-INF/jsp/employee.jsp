@@ -72,7 +72,7 @@ function openAddDialog() {
 	$('#form').form("clear");
 	$("#createMan").val('${currentUser.name}');
 	$("#createTime").val(Util.getCurrentDateTime());
-	url = "${ctx}/saleChance/addSaleChance.action";
+	url = "${ctx}/employee_addEmployee.action";
 	
 }
 /* 打开修改dialog */
@@ -84,7 +84,7 @@ function openUpdateDialog() {
 	}
 	var row = selections[0];
 	$("#dialog").dialog("open").dialog("setTitle","修改信息");
-	url = "${ctx}/saleChance/updateSaleChance.action";
+	url = "${ctx}/employee_updateEmployee.action";
 	$('#form').form("load", row);
 }
 
@@ -128,11 +128,8 @@ function doSave(){
 
 function doSearch(){
 	$("#datagrid").datagrid("load",{
-		'customerName' : $("#customerNameSearch").val(),
-		'createMan' : $("#createManSearch").val(),
-		'status' : $("#statusSearch").val(),
-		'startTime':$("#startTime").val(),
-		'endTime':$("#endTime").val()
+		'name' : $("#nameSearch").val(),
+		'role' : $("#roleSearch").val(),
 	})
 };
 
@@ -147,7 +144,7 @@ function doDelete() {
 	$.messager.confirm('确认','您确认想要删除记录吗？',function(r){    
 	    if (r){    
 	    	$.post(
-					"${ctx}/saleChance/delete.action",
+					"${ctx}/employee_deleteEmployee.action",
 					{ids:ids}, 
 					function(data) {
 						$.messager.progress('close');	// 如果表单是无效的则隐藏进度条
@@ -217,24 +214,26 @@ function uploadExcel(){
 		<a class="easyui-linkbutton" href="javascript:openAddDialog()" iconCls="icon-add">添加</a>
 		<a class="easyui-linkbutton" href="javascript:openUpdateDialog()" iconCls="icon-edit">修改</a>
 		<a class="easyui-linkbutton" href="javascript:doDelete()" iconCls="icon-remove">删除</a>
-		<a class="easyui-linkbutton" href="javascript:doExportExcel()" iconCls="icon-add">导出报表</a>
+		<!-- <a class="easyui-linkbutton" href="javascript:doExportExcel()" iconCls="icon-add">导出报表</a>
 		<input class="easyui-linkbutton" type ='button' value='打印' onclick='javascript:window.print()' /> 
 			<form id="questionTypesManage"  method="post" enctype="multipart/form-data">  
 			   	选择文件：　<input id="uploadExcel" name="uploadExcel" class="easyui-filebox" style="width:200px" data-options="prompt:'请选择文件...'">  
 			       　　<a href="#" class="easyui-linkbutton" style="width:122px" onclick="uploadExcel()" >导入报表</a> 　　     　　　　　      
 			</form>
-		&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp; -->
 		<div>
-		      客户名称：<input style="width: 100px;" type="text" id="customerNameSearch"></input>
-		       创建人：<input style="width: 100px;" type="text" id="createManSearch"></input>
-		       分配状态：<select style="width: 100px;" editable="false" panelHeight='auto' id="statusSearch" class="easyui-combobox" >
-		       		<option value="">请选择</option>
-					<option value="1">已分配</option>
-					<option value="0">未分配</option>
+		    员工姓名：<input style="width: 100px;" type="text" id="nameSearch"></input>
+		        所属部门：<input type="text" id="roleSearch" class="easyui-combobox"
+					 data-options="
+					 	url:'${ctx}/dataDic_findDepartmentdic.action',
+					 	valueField: 'value',
+					 	textField: 'value',
+					 	panelHeight:'auto'
+					 	 "/>
 				</select>
-			创建时间范围：
+			<!-- 创建时间范围：
 				<input id="startTime" name="startTime" class="easyui-datebox" data-options="sharedCalendar:'#cc'">
-				<input id="endTime" name="endTime" class="easyui-datebox" data-options="sharedCalendar:'#cc'"> 	
+				<input id="endTime" name="endTime" class="easyui-datebox" data-options="sharedCalendar:'#cc'"> --> 	
 		  <a href="javascript:doSearch();" class="easyui-linkbutton" iconCls="icon-search">搜索</a>
 		</div>
 	</div>
@@ -249,47 +248,31 @@ function uploadExcel(){
 			<input type="hidden" id="id" name="id"/>
 			<table cellspacing="8px">
 		   		<tr>
-		   			<td>客户名称：</td>
-		   			<td><input type="text" id="customerName" name="customerName" class="easyui-validatebox" required="true"/>&nbsp;<font color="red">*</font></td>
+		   			<td>员工姓名：</td>
+		   			<td><input type="text" id="name" name="name" class="easyui-validatebox" required="true"/>&nbsp;<font color="red">*</font></td>
 		   			<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-		   			<td>机会来源</td>
-		   			<td><input type="text" id="chanceSource" name="chanceSource" /></td>
+		   			<td>员工部门</td>
+		   			<td><input type="text" id="role" name="role" class="easyui-combobox"
+					 data-options="
+					 	url:'${ctx}/dataDic_findDepartmentdic.action',
+					 	valueField: 'value',
+					 	textField: 'value',
+					 	panelHeight:'auto'
+					 	 "/></td>
 		   		</tr>
 		   		<tr>
-		   			<td>联系人：</td>
-		   			<td><input type="text" id="linkMan" name="linkMan" /></td>
+		   			<td>电话：</td>
+		   			<td><input type="text" id="phone" name="phone" /></td>
 		   			<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-		   			<td>联系电话：</td>
-		   			<td><input type="text" id="linkPhone" name="linkPhone" /></td>
+		   			<td>微信：</td>
+		   			<td><input type="text" id="weixin" name="weixin" /></td>
 		   		</tr>
 		   		<tr>
-		   			<td>成功几率(%)：</td>
-		   			<td><input type="text" id="successRate" name="successRate" class="easyui-numberbox" data-options="min:0,max:100" required="true"/>&nbsp;<font color="red">*</font></td>
-		   			<td colspan="3">&nbsp;&nbsp;&nbsp;&nbsp;</td>
-		   		</tr>
-		   		<tr>
-		   			<td>概要：</td>
-		   			<td colspan="4"><input type="text" id="overview" name="overview" style="width: 420px"/></td>
-		   		</tr>
-		   		<tr>
-		   			<td>机会描述：</td>
-		   			<td colspan="4">
-		   				<textarea rows="5" cols="50" id="description" name="description"></textarea>
-		   			</td>
-		   		</tr>
-		   		<tr>
-		   			<td>创建人：</td>
-		   			<td><input type="text" editable="false" id="createMan" name="createMan" class="easyui-validatebox" required="true"/>&nbsp;<font color="red">*</font></td>
+		   			<td>qq：</td>
+		   			<td><input type="text" id="qq" name="qq" /></td>
 		   			<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-		   			<td>创建时间：</td>
-		   			<td><input type="text" readonly="true" id="createTime" name="createTime"/>&nbsp;<font color="red">*</font></td>
-		   		</tr>
-		   		<tr>
-		   			<td>指派给：</td>
-		   			<td><input class="easyui-combobox" id="assignMan" name="assignMan" data-options="panelHeight:'auto',editable:false,valueField:'trueName',textField:'trueName',url:'${ctx}/user/getCustomerManagerList.action'"/></td>
-		   			<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-		   			<td>指派时间：</td>
-		   			<td><input type="text" id="assignTime" name="assignTime" readonly="readonly"/></td>
+		   			<td>入职时间：</td>
+		   			<td><input type="text" id="time" name="time" class="easyui-datebox" data-options="sharedCalendar:'#cc'" /></td>
 		   		</tr>
 		   	</table>
 		</form>

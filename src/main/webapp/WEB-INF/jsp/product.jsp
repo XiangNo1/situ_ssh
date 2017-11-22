@@ -145,7 +145,7 @@ function doDelete() {
 	$.messager.confirm('确认','您确认想要删除记录吗？',function(r){    
 	    if (r){    
 	    	$.post(
-					"${ctx}/saleChance/delete.action",
+					"${ctx}/product_deleteProduct.action",
 					{ids:ids}, 
 					function(data) {
 						$.messager.progress('close');	// 如果表单是无效的则隐藏进度条
