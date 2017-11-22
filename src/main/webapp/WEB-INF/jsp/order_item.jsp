@@ -10,7 +10,7 @@
 $(function(){
 	/*展示数据的datagrid表格*/
 	$("#datagrid").datagrid({
-		url:'${ctx}/order_findAll.action',
+		url:'${ctx}/product_findProduct.action',
 		method:'get',
 		fit:true,
 		singleSelect:false,
@@ -21,19 +21,16 @@ $(function(){
 		columns:[[    
 		     {field:'cb',checkbox:true,align:'center'},    
 		     {field:'id',title:'(系统)编号',width:80,align:'center'},    
-		     {field:'order_no',title:'订单编号',width:100,align:'center'},    
-		     {field:'user',title:'下单者',width:80,align:'center'},    
-		     {field:'payer',title:'付款者',width:80,align:'center'},    
-		     {field:'payment',title:'总金额',width:100,align:'center'},    
-		     {field:'status',title:'订单状态',width:100,align:'center'},    
-		     {field:'time',title:'下单时间',width:100,align:'center'}, 
-		     {field:'a',title:'操作',width:80,align:'center',formatter:function(value,row,index){
-		    		 return "<a href='javascript:openOrder_item("+row.order_no+")'>订单商品详情</a>";
-		    	 }
-		     }
+		     {field:'product_id',title:'商品编号',width:80,align:'center'},    
+		     {field:'name',title:'商品名称',width:100,align:'center'},    
+		     {field:'specification',title:'规格',width:80,align:'center'},    
+		     {field:'type',title:'型号',width:80,align:'center'},    
+		     {field:'place',title:'产地',width:100,align:'center'},    
+		     {field:'amount',title:'数量',width:100,align:'center'},    
+		     {field:'price',title:'单价',width:100,align:'center'},    
+		     {field:'store_id',title:'所在仓库',width:100,align:'center'},    
 		]]  
 	});
-	
 	/*添加和修改弹出的dialog */
 	$("#dialog").dialog({
 		closed:'true',
@@ -57,9 +54,6 @@ $(function(){
 		
 	});
 });
-function openOrder_item(order_no){
-	window.parent.openTab('订单商品详情','${ctx}/to_order_item.action?order_no='+order_no+'&show=true','icon-khkfjh');
-}
 //如果分配指派人，指派时间为当前时间
 $(function(){
 	$("#assignMan").combobox({
@@ -80,7 +74,7 @@ function openAddDialog() {
 	$('#form').form("clear");
 	$("#createMan").val('${currentUser.name}');
 	$("#createTime").val(Util.getCurrentDateTime());
-	url = "${ctx}/order_addOrder.action";
+	url = "${ctx}/product_addProduct.action";
 	
 }
 /* 打开修改dialog */
@@ -92,7 +86,7 @@ function openUpdateDialog() {
 	}
 	var row = selections[0];
 	$("#dialog").dialog("open").dialog("setTitle","修改信息");
-	url = "${ctx}/saleChance/updateSaleChance.action";
+	url = "${ctx}/product_updateProduct.action";
 	$('#form').form("load", row);
 }
 
@@ -136,11 +130,7 @@ function doSave(){
 
 function doSearch(){
 	$("#datagrid").datagrid("load",{
-		'customerName' : $("#customerNameSearch").val(),
-		'createMan' : $("#createManSearch").val(),
-		'status' : $("#statusSearch").val(),
-		'startTime':$("#startTime").val(),
-		'endTime':$("#endTime").val()
+		'name' : $("#nameSearch").val(),
 	})
 };
 
@@ -155,7 +145,7 @@ function doDelete() {
 	$.messager.confirm('确认','您确认想要删除记录吗？',function(r){    
 	    if (r){    
 	    	$.post(
-					"${ctx}/saleChance/delete.action",
+					"${ctx}/product_deleteProduct.action",
 					{ids:ids}, 
 					function(data) {
 						$.messager.progress('close');	// 如果表单是无效的则隐藏进度条
@@ -221,23 +211,22 @@ function uploadExcel(){
 	<table id="datagrid"></table>
 	
 	<!-- toolbar 开始 -->
-	<div id="toolbar">
-		<!-- <a class="easyui-linkbutton" href="javascript:openAddDialog()" iconCls="icon-add">添加</a>
+	<!-- <div id="toolbar">
+		<a class="easyui-linkbutton" href="javascript:openAddDialog()" iconCls="icon-add">添加</a>
 		<a class="easyui-linkbutton" href="javascript:openUpdateDialog()" iconCls="icon-edit">修改</a>
-		<a class="easyui-linkbutton" href="javascript:doDelete()" iconCls="icon-remove">删除</a> -->
-		<!-- <a class="easyui-linkbutton" href="javascript:doExportExcel()" iconCls="icon-add">导出报表</a>
+		<a class="easyui-linkbutton" href="javascript:doDelete()" iconCls="icon-remove">删除</a>
+		<a class="easyui-linkbutton" href="javascript:doExportExcel()" iconCls="icon-add">导出报表</a>
 		<input class="easyui-linkbutton" type ='button' value='打印' onclick='javascript:window.print()' /> 
 			<form id="questionTypesManage"  method="post" enctype="multipart/form-data">  
 			   	选择文件：　<input id="uploadExcel" name="uploadExcel" class="easyui-filebox" style="width:200px" data-options="prompt:'请选择文件...'">  
 			       　　<a href="#" class="easyui-linkbutton" style="width:122px" onclick="uploadExcel()" >导入报表</a> 　　     　　　　　      
 			</form>
-		&nbsp;&nbsp;&nbsp;&nbsp; -->
-		<!-- <div>
-		      客户名称：<input style="width: 100px;" type="text" id="customerNameSearch"></input>
-		       创建人：<input style="width: 100px;" type="text" id="createManSearch"></input>
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		<div>
+		      商品名称：<input style="width: 100px;" type="text" id="nameSearch"></input>
 		  <a href="javascript:doSearch();" class="easyui-linkbutton" iconCls="icon-search">搜索</a>
-		</div> -->
-	</div>
+		</div>
+	</div> -->
 	<!-- toolbar 结束 -->
 	
 	<!-- 日历 -->
@@ -249,47 +238,32 @@ function uploadExcel(){
 			<input type="hidden" id="id" name="id"/>
 			<table cellspacing="8px">
 		   		<tr>
-		   			<td>客户名称：</td>
-		   			<td><input type="text" id="customerName" name="customerName" class="easyui-validatebox" required="true"/>&nbsp;<font color="red">*</font></td>
+		   			<td>商品名称：</td>
+		   			<td><input type="text" id="name" name="name" class="easyui-validatebox" required="true"/>&nbsp;<font color="red">*</font></td>
 		   			<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-		   			<td>机会来源</td>
-		   			<td><input type="text" id="chanceSource" name="chanceSource" /></td>
+		   			<td>商品编号</td>
+		   			<td><input type="text" id="product_id" name="product_id" /></td>
 		   		</tr>
 		   		<tr>
-		   			<td>联系人：</td>
-		   			<td><input type="text" id="linkMan" name="linkMan" /></td>
+		   			<td>规格：</td>
+		   			<td><input type="text" id="specification" name="specification" /></td>
 		   			<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-		   			<td>联系电话：</td>
-		   			<td><input type="text" id="linkPhone" name="linkPhone" /></td>
+		   			<td>型号：</td>
+		   			<td><input type="text" id="type" name="type" /></td>
 		   		</tr>
 		   		<tr>
-		   			<td>成功几率(%)：</td>
-		   			<td><input type="text" id="successRate" name="successRate" class="easyui-numberbox" data-options="min:0,max:100" required="true"/>&nbsp;<font color="red">*</font></td>
-		   			<td colspan="3">&nbsp;&nbsp;&nbsp;&nbsp;</td>
-		   		</tr>
-		   		<tr>
-		   			<td>概要：</td>
-		   			<td colspan="4"><input type="text" id="overview" name="overview" style="width: 420px"/></td>
-		   		</tr>
-		   		<tr>
-		   			<td>机会描述：</td>
-		   			<td colspan="4">
-		   				<textarea rows="5" cols="50" id="description" name="description"></textarea>
-		   			</td>
-		   		</tr>
-		   		<tr>
-		   			<td>创建人：</td>
-		   			<td><input type="text" editable="false" id="createMan" name="createMan" class="easyui-validatebox" required="true"/>&nbsp;<font color="red">*</font></td>
+		   			<td>产地：</td>
+		   			<td><input type="text" id="place" name="place" /></td>
 		   			<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-		   			<td>创建时间：</td>
-		   			<td><input type="text" readonly="true" id="createTime" name="createTime"/>&nbsp;<font color="red">*</font></td>
+		   			<td>仓库号：</td>
+		   			<td><input type="text" id="store_id" name="store_id" /></td>
 		   		</tr>
 		   		<tr>
-		   			<td>指派给：</td>
-		   			<td><input class="easyui-combobox" id="assignMan" name="assignMan" data-options="panelHeight:'auto',editable:false,valueField:'trueName',textField:'trueName',url:'${ctx}/user/getCustomerManagerList.action'"/></td>
+		   			<td>数量：</td>
+		   			<td><input type="text" id="amount" name="amount" /></td>
 		   			<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-		   			<td>指派时间：</td>
-		   			<td><input type="text" id="assignTime" name="assignTime" readonly="readonly"/></td>
+		   			<td>单价：</td>
+		   			<td><input type="text" id="price" name="price" /></td>
 		   		</tr>
 		   	</table>
 		</form>

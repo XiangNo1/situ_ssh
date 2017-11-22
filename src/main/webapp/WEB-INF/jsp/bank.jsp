@@ -258,7 +258,7 @@ function uploadExcel(){
 		   			<td><input type="text" id="money" name="money" /></td>
 		   			<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 		   			<td>下单时间：</td>
-		   			<td><input type="text" id="time" name="time" /></td>
+		   			<td><input type="text" id="time" name="time" class="easyui-datebox" data-options="sharedCalendar:'#cc'" /></td>
 		   		</tr>
 		   		<tr>
 		   			<td>备注：</td>
